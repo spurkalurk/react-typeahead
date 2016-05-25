@@ -56,7 +56,8 @@ var Typeahead = React.createClass({
       React.PropTypes.func
     ]),
     selectFirst: React.PropTypes.bool,
-    showOptionsWhenEmpty: React.PropTypes.bool
+    showOptionsWhenEmpty: React.PropTypes.bool,
+    closeDropdownOnBlur: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
@@ -85,7 +86,8 @@ var Typeahead = React.createClass({
       customListComponent: TypeaheadSelector,
       selectFirst: false,
       showOptionsWhenEmpty: false,
-      resultsTruncatedMessage: null
+      resultsTruncatedMessage: null,
+      closeDropdownOnBlur: false
     };
   },
 
@@ -234,6 +236,21 @@ var Typeahead = React.createClass({
     this.clearSelectionIndex();
   },
 
+  _onBlur: function() {
+    if (this.props.closeDropdownOnBlur) {
+      var value = this.refs.entry.value;
+
+      this.setState({
+        selection: value,
+        entryValue: value
+      });
+    }
+
+    if (this.props.onBlur) {
+      return this.props.onBlur();
+    }
+  },
+
   clearSelectionIndex: function() {
     this.setState({
       selectionIndex: null
@@ -358,7 +375,7 @@ var Typeahead = React.createClass({
           onKeyPress={this.props.onKeyPress}
           onKeyUp={this.props.onKeyUp}
           onFocus={this.props.onFocus}
-          onBlur={this.props.onBlur}
+          onBlur={this._onBlur}
         />
         { this._renderIncrementalSearchResults() }
       </div>

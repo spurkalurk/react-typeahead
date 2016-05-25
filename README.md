@@ -223,6 +223,13 @@ Default: false
 
 If true, first option will be selected by default.
 
+#### props.closeDropdownOnBlur
+
+Type: `boolean`
+Default: false
+
+If true, close the dropdown 'onBlur'
+
 ### Typeahead ([Exposed Component Functions][reactecf])
 
 #### typeahead.focus
