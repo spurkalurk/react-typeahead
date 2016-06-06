@@ -233,23 +233,12 @@ var Typeahead = React.createClass({
   },
 
   _onEscape: function() {
-    this.clearSelectionIndex();
-    var value = this.refs.entry.value;
-
-    this.setState({
-      selection: value,
-      entryValue: value
-    });
+    this._closeDropdownWithoutSelectingOption();
   },
 
   _onBlur: function() {
     if (this.props.closeDropdownOnBlur) {
-      var value = this.refs.entry.value;
-
-      this.setState({
-        selection: value,
-        entryValue: value
-      });
+      this._closeDropdownWithoutSelectingOption();
     }
 
     if (this.props.onBlur) {
@@ -275,6 +264,15 @@ var Typeahead = React.createClass({
     if (option !== null) {
       return this._onOptionSelected(option, event);
     }
+  },
+
+  _closeDropdownWithoutSelectingOption: function() {
+    var value = this.refs.entry.value;
+
+    this.setState({
+      selection: value,
+      entryValue: value
+    });
   },
 
   eventMap: function(event) {
