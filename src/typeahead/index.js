@@ -234,12 +234,18 @@ var Typeahead = React.createClass({
 
   _onEscape: function() {
     this.clearSelectionIndex();
+    var value = this.refs.entry.value;
+
+    this.setState({
+      selection: value,
+      entryValue: value
+    });
   },
 
   _onBlur: function() {
     if (this.props.closeDropdownOnBlur) {
       var value = this.refs.entry.value;
-      
+
       this.setState({
         selection: value,
         entryValue: value
