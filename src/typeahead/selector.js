@@ -53,7 +53,7 @@ var TypeaheadSelector = React.createClass({
           hover={this.props.selectionIndex === 0}
           customClasses={this.props.customClasses}
           customValue={this.props.customValue}
-          onClick={this._onClick.bind(this, this.props.customValue)}>
+          onMouseDown={this._onMouseDown.bind(this, this.props.customValue)}>
           { this.props.customValue }
         </TypeaheadOption>
       );
@@ -66,7 +66,7 @@ var TypeaheadSelector = React.createClass({
         <TypeaheadOption ref={uniqueKey} key={uniqueKey}
           hover={this.props.selectionIndex === i + customValueOffset}
           customClasses={this.props.customClasses}
-          onClick={this._onClick.bind(this, result)}>
+          onMouseDown={this._onMouseDown.bind(this, result)}>
           { displayString }
         </TypeaheadOption>
       );
@@ -94,7 +94,7 @@ var TypeaheadSelector = React.createClass({
     );
   },
 
-  _onClick: function(result, event) {
+  _onMouseDown: function(result, event) {
     return this.props.onOptionSelected(result, event);
   }
 
