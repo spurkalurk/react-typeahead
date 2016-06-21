@@ -103,13 +103,24 @@ var Typeahead = React.createClass({
       selection: this.props.value,
 
       // Index of the selection
-      selectionIndex: null
+      selectionIndex: null,
+
+      // Keep track of the focus state of the input element, to determine
+      // whether to show options when empty (if showOptionsWhenEmpty is true)
+      isFocused: false,
+
+      // true when focused, false onOptionSelected
+      showResults: false
     };
   },
 
   _shouldSkipSearch: function(input) {
     var emptyValue = !input || input.trim().length == 0;
-    return !this.props.showOptionsWhenEmpty && emptyValue;
+
+    // this.state must be checked because it may not be defined yet if this function
+    // is called from within getInitialState
+    var isFocused = this.state && this.state.isFocused;
+    return !(this.props.showOptionsWhenEmpty && isFocused) && emptyValue;
   },
 
   getOptionsForValue: function(value, options) {
@@ -200,7 +211,8 @@ var Typeahead = React.createClass({
     nEntry.value = optionString;
     this.setState({searchResults: this.getOptionsForValue(optionString, this.props.options),
                    selection: formInputOptionString,
-                   entryValue: optionString});
+                   entryValue: optionString,
+                   showResults: false});
     return this.props.onOptionSelected(option, event);
   },
 
@@ -378,12 +390,30 @@ var Typeahead = React.createClass({
           onKeyDown={this._onKeyDown}
           onKeyPress={this.props.onKeyPress}
           onKeyUp={this.props.onKeyUp}
-          onFocus={this.props.onFocus}
+          onFocus={this._onFocus}
           onBlur={this._onBlur}
         />
-        { this._renderIncrementalSearchResults() }
+        { this.state.showResults && this._renderIncrementalSearchResults() }
       </div>
     );
+  },
+
+  _onFocus: function(event) {
+    this.setState({isFocused: true, showResults: true}, function () {
+      this._onTextEntryUpdated();
+    }.bind(this));
+    if ( this.props.onFocus ) {
+      return this.props.onFocus(event);
+    }
+  },
+
+  _onBlur: function(event) {
+    this.setState({isFocused: false}, function () {
+      this._onTextEntryUpdated();
+    }.bind(this));
+    if ( this.props.onBlur ) {
+      return this.props.onBlur(event);
+    }
   },
 
   _renderHiddenInput: function() {
