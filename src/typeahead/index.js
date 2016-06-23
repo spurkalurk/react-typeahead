@@ -157,7 +157,7 @@ var Typeahead = React.createClass({
 
   _renderIncrementalSearchResults: function() {
     // A default value was passed in
-    if (this.props.defaultValue && !this.state.hasRendered) {
+    if (this.props.initialValue && !this.state.hasRendered) {
       return "";
     }
 
