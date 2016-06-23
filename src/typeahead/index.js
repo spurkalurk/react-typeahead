@@ -237,7 +237,8 @@ var Typeahead = React.createClass({
     this.timeout = setTimeout(() => {
       this.setState({
         searchResults: this.getOptionsForValue(value, this.props.options),
-        hasRendered: true
+        hasRendered: true,
+        showResults: true
       });
     }, this.props.delayMillis);
   },
