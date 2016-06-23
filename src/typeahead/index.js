@@ -114,6 +114,12 @@ var Typeahead = React.createClass({
     };
   },
 
+  componentWillUnmount: function() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+  },
+
   _shouldSkipSearch: function(input) {
     var emptyValue = !input || input.trim().length == 0;
 
