@@ -215,7 +215,7 @@ var Typeahead = React.createClass({
     var formInputOptionString = formInputOption(option);
 
     nEntry.value = optionString;
-    this.setState({searchResults: this.getOptionsForValue(optionString, this.props.options),
+    this.setState({searchResults: [],
                    selection: formInputOptionString,
                    entryValue: optionString,
                    showResults: false});
@@ -396,9 +396,12 @@ var Typeahead = React.createClass({
   },
 
   _onFocus: function(event) {
-    this.setState({isFocused: true, showResults: true}, function () {
-      this._onTextEntryUpdated();
-    }.bind(this));
+    this.setState({
+      isFocused: true,
+      selection: '',
+      entryValue: this.refs.entry.value
+    });
+
     if ( this.props.onFocus ) {
       return this.props.onFocus(event);
     }
