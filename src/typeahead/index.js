@@ -365,11 +365,11 @@ var Typeahead = React.createClass({
   },
 
   render: function() {
-    var inputClasses = {};
-    inputClasses[this.props.customClasses.input] = !!this.props.customClasses.input;
-    var inputClassList = classNames(inputClasses, {
+    var inputClasses = {
       mousetrap: this.props.mousetrap
-    });
+    };
+    inputClasses[this.props.customClasses.input] = !!this.props.customClasses.input;
+    var inputClassList = classNames(inputClasses);
 
     var classes = {
       typeahead: this.props.defaultClassNames
