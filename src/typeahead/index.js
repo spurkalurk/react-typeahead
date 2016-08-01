@@ -359,7 +359,7 @@ var Typeahead = React.createClass({
       searchResults: this.getOptionsForValue(this.state.entryValue, nextProps.options)
     };
 
-    if (this.props.selectFirst && nextProps.options.length) {
+    if (this.props.selectFirst && nextProps.options.length && this.state.showResults) {
       typeheadOptionsState.selectionIndex = 0;
     }
 
