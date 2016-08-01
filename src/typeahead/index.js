@@ -367,6 +367,7 @@ var Typeahead = React.createClass({
   },
 
   render: function() {
+    console.log("rendering, index: ", this.state.selectionIndex);
     var inputClasses = {};
     inputClasses[this.props.customClasses.input] = !!this.props.customClasses.input;
     var inputClassList = classNames(inputClasses);
