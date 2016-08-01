@@ -245,6 +245,8 @@ var Typeahead = React.createClass({
       typeaheadState.selectionIndex = 0;
     }
 
+    console.log(typeaheadState);
+
     this.timeout = setTimeout(() => {
       this.setState(typeaheadState);
     }, this.props.delayMillis);
