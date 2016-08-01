@@ -57,7 +57,8 @@ var Typeahead = React.createClass({
     ]),
     selectFirst: React.PropTypes.bool,
     showOptionsWhenEmpty: React.PropTypes.bool,
-    closeDropdownOnBlur: React.PropTypes.bool
+    closeDropdownOnBlur: React.PropTypes.bool,
+    mousetrap: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
@@ -87,7 +88,8 @@ var Typeahead = React.createClass({
       selectFirst: false,
       showOptionsWhenEmpty: false,
       resultsTruncatedMessage: null,
-      closeDropdownOnBlur: false
+      closeDropdownOnBlur: false,
+      mousetrap: false
     };
   },
 
@@ -365,7 +367,9 @@ var Typeahead = React.createClass({
   render: function() {
     var inputClasses = {};
     inputClasses[this.props.customClasses.input] = !!this.props.customClasses.input;
-    var inputClassList = classNames(inputClasses);
+    var inputClassList = classNames(inputClasses, {
+      mousetrap: this.props.mousetrap
+    });
 
     var classes = {
       typeahead: this.props.defaultClassNames
