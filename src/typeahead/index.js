@@ -245,7 +245,10 @@ var Typeahead = React.createClass({
   },
 
   _onEnter: function(event) {
+    console.log("ON ENTER", event);
+    console.log("seletion index: ", this.state.selectionIndex);
     var selection = this.getSelection();
+    console.log("selection: ", selection);
     if (!selection) {
       return this.props.onKeyDown(event);
     }
