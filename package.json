@@ -40,6 +40,7 @@
   },
   "main": "lib/react-typeahead.js",
   "devDependencies": {
+    "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.5.0",
     "babelify": "^7.2.0",
     "browserify": "^8.0.2",

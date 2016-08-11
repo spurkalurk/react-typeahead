@@ -12,7 +12,10 @@ gulp.task('test', function() {
 gulp.task('build', function () {
     return gulp.src('./src/**')
         .pipe(babel({
-            presets: ['react']
+            presets: [
+              'es2015',
+              'react'
+            ]
         }))
         .pipe(gulp.dest('./lib'));
 });
